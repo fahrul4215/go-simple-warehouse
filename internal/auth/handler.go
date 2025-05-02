@@ -29,7 +29,7 @@ func LoginHandler(db *gorm.DB, cfg *config.Config) gin.HandlerFunc {
 			return
 		}
 		if err := user.CheckPassword(req.Password); err != nil {
-			c.Error(err)
+			c.JSON(http.StatusUnauthorized, gin.H{"error": "invalid credentials"})
 			return
 		}
 		// create token

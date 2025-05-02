@@ -3,14 +3,17 @@ package main
 import (
 	"go-simple-warehouse/internal/auth"
 	"go-simple-warehouse/internal/config"
+	"go-simple-warehouse/internal/dashboard"
 	"go-simple-warehouse/internal/database"
 	"go-simple-warehouse/internal/middleware"
 	"go-simple-warehouse/internal/product"
 	"log"
 	"os"
+	"time"
 
 	"github.com/joho/godotenv"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -40,11 +43,25 @@ func main() {
 	}
 
 	r := gin.Default()
+
+	// add CORS middleware
+	r.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"http://127.0.0.1:5173"}, // your Vite dev origin
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Accept", "Authorization"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+		MaxAge:           12 * time.Hour,
+	}))
+
 	r.Static("/barcodes", "./barcodes")
 
 	r.Use(middleware.Error())
 
+	// routes
 	r.POST("/auth/login", auth.LoginHandler(db, cfg))
+
+	r.GET("/dashboard", middleware.JWT(cfg), dashboard.DashboardMetrics(db))
 
 	p := r.Group("/products", middleware.JWT(cfg))
 	{

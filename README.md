@@ -13,6 +13,7 @@ go get gorm.io/gorm #ORM
 go get gorm.io/driver/mysql #mysql driver
 go get github.com/go-playground/validator/v10 #Data validation
 go get github.com/boombuler/barcode #Generate Barcode
+go get github.com/gin-contrib/cors #of CORS :'v
 ```
 
 ## Setup

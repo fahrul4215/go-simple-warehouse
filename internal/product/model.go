@@ -3,7 +3,7 @@ package product
 import "time"
 
 type Product struct {
-	ID          uint      `gorm:"primaryKey"`
+	ID          uint      `gorm:"primaryKey" json:"id"`
 	SKU         string    `gorm:"unique;not null" json:"sku" validate:"required,alphanum"`
 	Name        string    `gorm:"not null" json:"name" validate:"required"`
 	Description string    `gorm:"type:text" json:"description"`

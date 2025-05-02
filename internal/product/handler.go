@@ -14,7 +14,7 @@ import (
 
 var validate = validator.New()
 
-// CreateProduct handles the creation of a new product.
+// CreateProduct
 func CreateProduct(db *gorm.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var in Product
@@ -139,7 +139,7 @@ func DeleteProduct(db *gorm.DB) gin.HandlerFunc {
 	}
 }
 
-// GetProduct handles fetching a single product by ID.
+// GetProduct
 func GetProduct(db *gorm.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var product Product
@@ -156,7 +156,7 @@ func GetProduct(db *gorm.DB) gin.HandlerFunc {
 	}
 }
 
-// ListProducts handles listing products with filters, sorting, and pagination.
+// ListProducts
 func ListProducts(db *gorm.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var (
