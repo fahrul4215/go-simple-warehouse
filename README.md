@@ -15,6 +15,14 @@ go get github.com/go-playground/validator/v10 #Data validation
 go get github.com/boombuler/barcode #Generate Barcode
 ```
 
+## Setup
+
+### .env
+
+```bash
+cp .env.example .env
+```
+
 ## Usage
 
 ```bash
